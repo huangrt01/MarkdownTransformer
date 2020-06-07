@@ -792,6 +792,9 @@ find . -name '*.png' -exec convert {} {.}.jpg \;
 * ls
   * -l: long listing format; drwxr-xr-x，d代表文件夹，后面3*3代表owner、owning group、others的权限
   * r：read，w：modify，x：execute
+
+* lsof: 查看文件占用
+  * 也可查看端口占用，接grep 即可 
 #### m
 * man: q退出
 * mkdir
