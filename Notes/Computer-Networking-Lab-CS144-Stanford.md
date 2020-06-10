@@ -3,7 +3,7 @@
 
 **写在前面**
 
-在历史的伟力面前，个人的命运是不可捉摸的。学生生涯结束地比想象中快，下个月就要正式入职字节跳动了。回顾本科期间，做过的大作业不少，却大多是期中对着一页不明就里的薄纸发呆，期末临近deadline，东抄抄西补补，勉强弄个不忍直视的半成品，没有时间也没有能力完成一次高质量的大作业。因此代码能力很差，打算在入职前至少做一个Lab，之所以选择stanford的CS144，一方面是因为这门课质量很高，b站有配套的视频，Lab也在这两年做了大的改进，改为了一个优雅的TCP实现，全部资料都开源在[课程网站](https://cs144.github.io/)上，适合自学。另一方面，我本科期间没有学过计算机网络，这次补课也有一举两得的意味。
+在历史的伟力面前，个人的命运是不可捉摸的。学生生涯结束地比想象中快，下个月就要正式入职字节跳动了。回顾本科期间，做过的大作业不少，却大多是期中对着一页不明就里的薄纸发呆，期末临近deadline，东抄抄西补补，勉强弄个不忍直视的半成品，没有时间也没有能力完成一次高质量的大作业。打算在入职前至少做一个Lab，之所以选择stanford的CS144，一方面是因为这门课质量很高，b站有配套的视频，Lab也在这两年做了大的改进，改为了一个优雅的TCP实现，全部资料都开源在[课程网站](https://cs144.github.io/)上，适合自学。另一方面，我本科期间没有学过计算机网络，这次补课也有一举两得的意味。
 
 做下来感觉不错，课程的老师和助教很用心：说明文档十页长，FAQ覆盖了作业中会遇到的方方面面的问题；大作业的单元测试的代码量是模块代码的几倍，倾注了助教的心血。如果没有这些模块架构和单元测试，对于初学者来说是很难完成即使是初级的TCP协议栈编写，充分利用这些资源，站在巨人的肩膀上，能力能得到更好的锻炼。
 
@@ -163,11 +163,26 @@ sponge网络库的设计，TCP的测试中利用到状态判断，但具体到se
 
 #### lab4: the summit (TCP in full)
 
-这次Lab是把之前的receiver和sender封装成TCPConnection类，可以用来进行真实世界的通信。
+这次Lab是把之前的receiver和sender封装成TCPConnection类，用来进行真实世界的通信。
 
 <img src="Computer-Networking-Lab-CS144-Stanford/dataflow.jpg" alt="TCP dataflow" style="zoom:100%;" />
 
-In the test names, “c” means your code is the client (peer that sends the first syn), and “s” meansyour code is the server.  The letter “u” means it is testing TCP-over-UDP, and “i” is testing TCP-over-IP(TCP/IP). The letter “n” means it is trying to interoperate with Linux’s TCP implementation.  “S” means your code is sending data; “R” means your code is receiving data, and “D” means data is being sent in bothdirections.  At the end of a test name, a lowercase “l” means there is packet loss on the receiving (incomingsegment) direction, and uppercase “L” means there is packet loss on the sending (outgoing segment) direction.
+<img src="Computer-Networking-Lab-CS144-Stanford/header.jpg" alt="TCP header" style="zoom:80%;" />
+
+
+
+In the test names
+
+* “c” means your code is the client (peer that sends the first syn)
+* “s” means your code is the server.  
+* “u” means it is testing TCP-over-UDP
+* “i” is testing TCP-over-IP(TCP/IP). 
+* “n” means it is trying to interoperate with Linux’s TCP implementation
+* “S” means your code is sending data
+* “R” means your code is receiving data
+* “D” means data is being sent in bothdirections
+* At the end of a test name, a lowercase “l” means there is packet loss on the receiving (incoming segment) direction
+* uppercase “L” means there is packet loss on the sending (outgoing segment) direction.
 
 
 
