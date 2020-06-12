@@ -163,7 +163,7 @@ sponge网络库的设计，TCP的测试中利用到状态判断，但具体到se
 
 #### lab4: the summit (TCP in full)
 
-这次Lab是把之前的receiver和sender封装成TCPConnection类，用来进行真实世界的通信。
+这次Lab是把之前的receiver和sender封装成TCPConnection类，用来进行真实世界的通信，下图有助于直观理解结构。
 
 <img src="https://raw.githubusercontent.com/huangrt01/Markdown-Transformer-and-Uploader/master/Notes/Computer-Networking-Lab-CS144-Stanford/dataflow.jpg" alt="TCP dataflow" style="zoom:100%;" />
 
@@ -171,7 +171,7 @@ sponge网络库的设计，TCP的测试中利用到状态判断，但具体到se
 
 
 
-In the test names
+实验的测试文件一如既往的重要，命名规则如下：
 
 * “c” means your code is the client (peer that sends the first syn)
 * “s” means your code is the server.  
@@ -181,16 +181,33 @@ In the test names
 * “S” means your code is sending data
 * “R” means your code is receiving data
 * “D” means data is being sent in bothdirections
-* At the end of a test name, a lowercase “l” means there is packet loss on the receiving (incoming segment) direction
+* lowercase “l” means there is packet loss on the receiving (incoming segment) direction
 * uppercase “L” means there is packet loss on the sending (outgoing segment) direction.
 
-**非常重要的细节**
+**实现时的重要细节：** 
+
+1.需要单独讨论重传ACK的情形，在我的实现中我写了一个`send_ack_back()`函数
 
 **In `TCPConnection::segment_received`, what are the three conditions in which the TCPConnection needs     to make sure that the segment receives at least one ACK segment in reply, and may need to force the TCPSender to spit out an empty segment to make this happen?**
 
-1. If the incoming segment occupies any sequence numbers       (`length_in_sequence_space() > 0`) 	    
-2. If the `TCPReceiver` thinks the segment is unacceptable (`TCPReceiver::segment_received()` returns `false`) 	    
-3. If the `TCPSender` thinks the ackno is invalid (`TCPSender::ack_received()` returns `false`)   
+* If the incoming segment occupies any sequence numbers       (`length_in_sequence_space() > 0`) 	    
+* If the `TCPReceiver` thinks the segment is unacceptable (`TCPReceiver::segment_received()` returns `false`) 	    
+* If the `TCPSender` thinks the ackno is invalid (`TCPSender::ack_received()` returns `false`)   
+
+2.处理RST
+* 如果收到RST，需要给sender和receiver的stream用set_error()，不需要回传
+* 发送RST的情形
+  * 错误的connect，connect()函数中  
+  * unclean shutdown，析构函数中
+  * 连续重传超次数 `_sender.consecutive_retransmissions() > TCPConfig::MAX_RETX_ATTEMPTS`
+
+3.判断终结条件
+* 具体实现：见代码以及实验指导书的第5节。
+* 背后的理念：Because of the [Two Generals Problem](https://en.wikipedia.org/wiki/Two_Generals'_Problem), it’s impossible to guarantee that both peers can achieve a clean shutdown
+
+**Debug**
+
+最后和linux系统真实地进行通信，总有10个tests过不了，打算先研究这一个测试样例: `../txrx.sh -isDnd 128K -w 8K -l 0.1`
 
 
 
