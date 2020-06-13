@@ -355,7 +355,7 @@ end-to-end check
 
 <img src="https://raw.githubusercontent.com/huangrt01/Markdown-Transformer-and-Uploader/master/Notes/Computer-Networking-Lecture-CS144-Stanford/014.jpg" alt="stop-and-wait" style="zoom:100%;" />
 
-##### 2-7 Flow Control II: Sliding Window
+##### 2-8 Flow Control II: Sliding Window
 * Stop-and-Wait的性能：RTT=50ms, Bottleneck=10Mbps, Ethernet packet length=12Kb => 性能(2%)远远不到瓶颈
 * Sliding Window计算Window size填满性能
 
@@ -391,7 +391,7 @@ end-to-end check
 * Receiver advertises RWS using window field
 * Sender can only send data up to LAR+SWS
 
-##### 2-8 Retransmission Strategies
+##### 2-9 Retransmission Strategies
 protocol可能的运转方式 (ARQ: automatic repeat request)
 * Go-back-N: pessimistic，重传ack, ack+1, ack+2 ...
   * e.g. RWS=1的情形
@@ -399,7 +399,7 @@ protocol可能的运转方式 (ARQ: automatic repeat request)
   * e.g. RWS=SWS=N的情形
   * 对burst of losses效果不好
 
-##### 2-9 TCP Header
+##### 2-10 TCP Header
 
 <img src="https://raw.githubusercontent.com/huangrt01/Markdown-Transformer-and-Uploader/master/Notes/Computer-Networking-Lecture-CS144-Stanford/015.jpg" alt="TCP header" style="zoom:100%;" />
 
@@ -411,6 +411,8 @@ protocol可能的运转方式 (ARQ: automatic repeat request)
 * ACK: 除了第一个packet SYN，其它seg的ACK都置换为1  
 * RST: reset the connection
 * urgent pointer：和URG联系，指出哪里urgent
+
+##### 2-11 TCP Setup and Teardown
 
 
 
@@ -446,6 +448,7 @@ protocol可能的运转方式 (ARQ: automatic repeat request)
 * [RFC 2606](https://datatracker.ietf.org/doc/rfc2606/): localhost
 * [RFC 6298](https://datatracker.ietf.org/doc/rfc6298/?include_text=1): Computing TCP's Retransmission Timer
 * [RFC 6335](https://tools.ietf.org/html/rfc6335): port number
+* RFC 7414: A Roadmap for TCP
 
 
 
