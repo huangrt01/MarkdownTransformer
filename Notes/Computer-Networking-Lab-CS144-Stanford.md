@@ -151,6 +151,7 @@ sponge网络库的设计，TCP的测试中利用到状态判断，但具体到se
 * 重传条件是"outstanding for too long", 受tick影响，tick仅由外部的类调用，sender内部不调用任何时间相关的函数
 * retransmission timeout(RTO)，具体实现是RFC6298的简化版
   * 重传连续的之后double ；收到ackno后重置到`_initial_RTO`
+  * 可参考[RFC 6298](https://datatracker.ietf.org/doc/rfc6298/?include_text=1)第5小节实现_timer
 * 注意读`/lib_sponge/tcp_helper/tcp_state.cc`帮助理解状态变化
 
 
@@ -208,6 +209,10 @@ sponge网络库的设计，TCP的测试中利用到状态判断，但具体到se
 **Debug**
 
 最后和linux系统真实地进行通信，总有10个tests过不了，打算先研究这一个测试样例: `../txrx.sh -isDnd 128K -w 8K -l 0.1`
+
+Github上找到一个顺利过关的[印度大哥](https://github.com/gcidart/cs144)，他给了一些debug建议
+
+运行`./tcp_benchmark`发现，处理segments倒着传的情形效率不高，但[印度大哥](https://github.com/gcidart/cs144)代码的benchmark很猛，准备再问他这个问题。
 
 
 
