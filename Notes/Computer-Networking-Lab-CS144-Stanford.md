@@ -212,11 +212,11 @@ sponge网络库的设计，TCP的测试中利用到状态判断，但具体到se
 
 2.Github上找到一个顺利过关的[印度大哥](https://github.com/gcidart/cs144)，他给了一些[debug建议](https://github.com/gcidart/cs144/issues/1)
 
-4.做了一些细节优化，速度提升到了1.05Gbit/s，但还是过不了tests。。。
+3.改了一些tcp_connection和tcp_sender的细节，benchmark速度提升
 
-5.通过替换模块，发现bug不在tcp_connection里，甚至用印度大哥的这个上层模块，过不了的tests更多
+4.debug无果，决定替换印度大哥模块逐一排查，发现是tcp_receiver出了问题，
 
-6.最终的bug再
+4.最终的bug非常坑，即使是助教写的测试样例也无法照顾到，只有当和linux的tcp进行真实丢包通信时才会出现，具体是在以下这一行tcp滑窗控制 ``
 
 
 
