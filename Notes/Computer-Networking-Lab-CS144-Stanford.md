@@ -208,11 +208,15 @@ sponge网络库的设计，TCP的测试中利用到状态判断，但具体到se
 
 **Debug**
 
-最后和linux系统真实地进行通信，总有10个tests过不了，打算先研究这一个测试样例: `../txrx.sh -isDnd 128K -w 8K -l 0.1`
+1.最后和linux系统真实地进行通信，总有10个tests过不了，打算先研究这一个测试样例: `../txrx.sh -isDnd 128K -w 8K -l 0.1`
 
-Github上找到一个顺利过关的[印度大哥](https://github.com/gcidart/cs144)，他给了一些debug建议
+2.Github上找到一个顺利过关的[印度大哥](https://github.com/gcidart/cs144)，他给了一些[debug建议](https://github.com/gcidart/cs144/issues/1)
 
-运行`./tcp_benchmark`发现，处理segments倒着传的情形效率不高，但[印度大哥](https://github.com/gcidart/cs144)代码的benchmark很猛，准备再问他这个问题。
+4.做了一些细节优化，速度提升到了1.05Gbit/s，但还是过不了tests。。。
+
+5.通过替换模块，发现bug不在tcp_connection里，甚至用印度大哥的这个上层模块，过不了的tests更多
+
+6.最终的bug再
 
 
 
@@ -242,3 +246,4 @@ class typeUnassembled {
 };
 ```
 * `urg = static_cast<bool>(fl_b & 0b0010'0000); // binary literals and ' digit separator since C++14!!!`
+
