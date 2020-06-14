@@ -119,7 +119,7 @@ profilers和monitoring tools的意义：[premature optimization is the root of a
 
 #### Profilers
 
-**CPU**:[两种CPU profilers](https://jvns.ca/blog/2017/12/17/how-do-ruby---python-profilers-work-)，tracing and sampling profilers
+**CPU**: [两种CPU profilers](https://jvns.ca/blog/2017/12/17/how-do-ruby---python-profilers-work-)，tracing and sampling profilers
 
 * Python
   * cProfile: `python -m cProfile -s tottime grep.py 1000 '^(import|\s*def)[^,]*$' *.py`
@@ -128,6 +128,8 @@ profilers和monitoring tools的意义：[premature optimization is the root of a
 ```Python
 b = [2] * (2 * 10 ** 7)
 del b
+
+
 ```
 
 **Event Profiling** 

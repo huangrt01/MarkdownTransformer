@@ -216,7 +216,13 @@ sponge网络库的设计，TCP的测试中利用到状态判断，但具体到se
 
 4.debug无果，决定替换印度大哥模块逐一排查，发现是tcp_receiver出了问题，
 
-4.最终的bug非常坑，即使是助教写的测试样例也无法照顾到，只有当和linux的tcp进行真实丢包通信时才会出现，具体是在以下这一行tcp滑窗控制 ``
+4.最终的bug非常坑，即使是助教写的测试样例也无法照顾到，只有当和linux的tcp进行真实丢包通信时才会出现，具体是在以下这一行tcp滑窗控制: 
+
+`bool inbound =  (seq_start>=win_start&& seq_start<=win_end) ||  (payload_end>=win_start && seq_end<=win_end);`
+
+receive的条件是数据片段和receiver的窗有重合，这个实现看似很简单，只需要写出数据的begin和end，窗的begin和end，然后做判断。具体来说，判断数据的begin是否在窗里，再判断数据的end是否在窗里即可。但在TCPReceiver的具体实现中，在判断数据的end是否在窗里时，需要用两个普通的end：代码中的`payload_end`是原先的`seq_end`经过处理得到的，需要把syn和fin占的位置排除掉，这样处理是因为receiver内部的`_reassembler`类只处理data，不处理syn和fin。
+
+综合来说，需要对基础的窗的判断条件做修改，具体实现中不是一个uniform的形式，只有这样才能过最后几个tests。
 
 
 
