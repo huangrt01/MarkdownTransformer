@@ -1,7 +1,7 @@
 import random
 
 
-def test_sorted(fn, iters=1000):
+def test_sorted(fn, iters=100):
     for i in range(iters):
         l = [random.randint(0, 100) for i in range(0, random.randint(0, 50))]
         assert fn(l) == sorted(l)
