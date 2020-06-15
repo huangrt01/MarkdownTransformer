@@ -527,6 +527,7 @@ pidwait(){
 * curl
   * -I/--head: 只显示传输文档，经常用于测试连接本身
 `curl --head --silent baidu.com | grep --ignore-case content-length | cut -f2 -d ' '`
+  * [curl查询公网出口ip](https://www.jianshu.com/p/e9b26711c9de) `curl cip.cc`
 * cut
   * 使用 -f 选项提取指定字段：`cut -f2,3 test.txt`
 * cp
