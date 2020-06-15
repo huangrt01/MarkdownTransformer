@@ -129,7 +129,8 @@ profilers和monitoring tools的意义：[premature optimization is the root of a
 b = [2] * (2 * 10 ** 7)
 del b
 
-
+kernprof -l -v sorts.py
+python -m line_profiler sorts.py.lprof
 ```
 
 **Event Profiling** 
@@ -201,3 +202,6 @@ watch -l XX
 reverse-cont
 ```
 
+[memory-profiler](https://pypi.org/project/memory-profiler/)
+
+[pycallgraph](http://pycallgraph.slowchop.com/en/master/)
