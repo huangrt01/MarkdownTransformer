@@ -1,14 +1,16 @@
 ### Stanford CS144
 * [CS144视频（b站）](https://www.bilibili.com/video/BV1wt41167iN?from=search&seid=12807244912122184980)
 * [CS144课程网站（包括Pdf、Lab）](https://cs144.github.io/)
-* [我的CS144 Lab分析]()(https://github.com/huangrt01/CS-Notes/blob/master/Notes/Output/Computer-Networking-Lab-CS144-Stanford.md)
+* [我的CS144 Lab笔记](https://github.com/huangrt01/CS-Notes/blob/master/Notes/Output/Computer-Networking-Lab-CS144-Stanford.md)
 
 ##### 1-0 The Internet and IP Introduction
-* internet layer: Internet Protocol, IP address, packet's path
-* 彩蛋：世一大惺惺相惜
+internet layer: Internet Protocol, IP address, packet's path
+
+彩蛋：世一大惺惺相惜
 <img src="https://raw.githubusercontent.com/huangrt01/Markdown-Transformer-and-Uploader/master/Notes/Computer-Networking-Lecture-CS144-Stanford/005.jpg" alt="Stanford-THU" style="zoom:60%;" />
 
-* 用`ping`和`traceroute`看IP地址; 光纤2/3光速，8637km - RTT=86ms
+用`ping`和`traceroute`看IP地址; 光纤2/3光速，8637km - RTT=86ms
+
 ##### 1-1 A day in the life of an application
 * Networked Applications: connectivity, bidirectional and reliable data stream
 * Byte Stream Model: A - Internet - B, server和A、B均可中断连接
@@ -49,6 +51,7 @@ Internet: end-hosts, links and routers
   * 比如视频传输不需要TCP，可以用UDP(User Datagram Protocol),不保证传输
 * Application Layer
   
+
 two extra things
 * IP is the "thin waist"   ,这一层的选择最少
 * the 7-layer OSI Model
@@ -158,25 +161,26 @@ Classless Inter-Domain Routing(CIDR，无类别域间路由)
 * IANA(Internet Assigned Numbers Authority): give /8s to RIRs
 
 ##### 1-10 Longest Prefix Match(LPM)
-* forwarding table: CIDR entries
-  * LPM的前提是必须先match，再看prefix
-  * default: 0.0.0.0/0
+forwarding table: CIDR entries
+* LPM的前提是必须先match，再看prefix
+* default: 0.0.0.0/0
 
 ##### 1-11 Address Resolution Protocol(ARP)
-* IP address(host) -> link address(Ethernet card, 48bits)
-* Addressing Problem: 一个host对应多个IP地址，不容易对应
-  * 解决方案：gateway两侧ip地址不同，link address确定card，network address确定host
-  * 这有点历史遗留问题，ip和link address的机制没有完全地分离开，decoupled logically but coupled in practice
-  * 对于A，ip的目标是B，link的目标是gateway
+IP address(host) -> link address(Ethernet card, 48bits)
 
-* ARP，地址解析协议：由IP得到MAC地址 => 进一步可得到gateway address
-  * 是一种request-reply protocol
-  * nodes cache mappings, cache entries expire
-  * 节点request a link layer broadcast address，然后收到回复，回复的packet有redundant data，看到它的节点都能生成mapping
-  * reply：原则上unicast，只回传给发送者=>实际实现时更常见broadcast
-  * No "sharing" of state: bad state will die eventually
-  * MacOS中保留20min
-  * gratuitous request: 要求不存在的mapping，推销自己
+Addressing Problem: 一个host对应多个IP地址，不容易对应
+* 解决方案：gateway两侧ip地址不同，link address确定card，network address确定host
+* 这有点历史遗留问题，ip和link address的机制没有完全地分离开，decoupled logically but coupled in practice
+* 对于A，ip的目标是B，link的目标是gateway
+
+**ARP，地址解析协议**：由IP得到MAC地址 => 进一步可得到gateway address
+* 是一种request-reply protocol
+* nodes cache mappings, cache entries expire
+* 节点request a link layer broadcast address，然后收到回复，回复的packet有redundant data，看到它的节点都能生成mapping
+* reply：原则上unicast，只回传给发送者=>实际实现时更常见broadcast
+* No "sharing" of state: bad state will die eventually
+* MacOS中保留20min
+* gratuitous request: 要求不存在的mapping，推销自己
 
 <img src="https://raw.githubusercontent.com/huangrt01/Markdown-Transformer-and-Uploader/master/Notes/Computer-Networking-Lecture-CS144-Stanford/007.jpg" alt="ARP" style="zoom:60%;" />
 
@@ -227,22 +231,25 @@ SIP的应用场景
 
 **Techniques to manufacture reliability**
 
-* Remedies
-  * Sequence numbers: detect missing data
-  * Acknowledgments: correct delivery
-    * Acknowledgment (from receiver to sender)  
-    * Timer and timeout (at sender)
-    * Retransmission (by sender)
-  * Checksums/MACs: detect corrupted data
-    * Header checksum (IP)
-    * Data checksum (UDP)
-	* Window-based Flow-control: prevents overrunning receiver
-  * FEC
-  * Retransmission
-  * Heartbeats
-* Correlated failure
-* TCP/DNS
-* Paradox of airplanes
+Remedies
+* Sequence numbers: detect missing data
+* Acknowledgments: correct delivery
+  * Acknowledgment (from receiver to sender)  
+  * Timer and timeout (at sender)
+  * Retransmission (by sender)
+* Checksums/MACs: detect corrupted data
+  * Header checksum (IP)
+  * Data checksum (UDP)
+* Window-based Flow-control: prevents overrunning receiver
+* FEC
+* Retransmission
+* Heartbeats
+
+Correlated failure
+
+TCP/DNS
+
+Paradox of airplanes
 
 
 
@@ -281,17 +288,20 @@ SIP的应用场景
 * 对重传、拥塞控制、in-sequence delivery有special needs的应用，比如音频，但现在UDP不像以前用的那么多，因为很多是http，基于TCP。
 
 ##### 2-3 The Internet Control Message Protocol (ICMP) Service Model
-* 用于report errors and diagnoise problems about network layer
-* 网络层work的三个因素：IP、Routing Tables、ICMP
+report errors and diagnoise problems about network layer
+
+网络层work的三个因素：IP、Routing Tables、ICMP
 
 <img src="https://raw.githubusercontent.com/huangrt01/Markdown-Transformer-and-Uploader/master/Notes/Computer-Networking-Lecture-CS144-Stanford/011.jpg" alt="ICMP" style="zoom:40%;" />
 
-* Message的意义见RFC 792
-* 应用于ping：先发送8 0( echo request)，再送回0 0(echo reply)
-* 应用于traceroute: 
-  * 核心思想：连续发送TTL从1开始递增的UDP，期待回复的11 0(TTL expires)
-  * 由于路由选择问题，traceroute 无法保证每次到同一个主机经过的路由都是相同的。
-  * traceroute 发送的 UDP 数据报端口号是大于 30000 的。如果目的主机没有任何程序使用该端口，主机会产生一个3 3(端口不可达)ICMP报文给源主机。
+Message的意义见RFC 792
+
+应用于ping：先发送8 0( echo request)，再送回0 0(echo reply)
+
+应用于traceroute: 
+* 核心思想：连续发送TTL从1开始递增的UDP，期待回复的11 0(TTL expires)
+* 由于路由选择问题，traceroute 无法保证每次到同一个主机经过的路由都是相同的。
+* traceroute 发送的 UDP 数据报端口号是大于 30000 的。如果目的主机没有任何程序使用该端口，主机会产生一个3 3(端口不可达)ICMP报文给源主机。
 
 ##### 2-4 End-to-End Principle
 **Why Doesn't the Network Help?**
@@ -433,10 +443,9 @@ Active opener and Passive opener
 
 ##### 2-12 TCP Recap
 
-* IP和UDP都是best-effort and unreliable，但是我们不需要担心truncation和corruption，因为：
-
-     * Header checksum (IP)
-     * Data checksum (UDP)
+IP和UDP都是best-effort and unreliable，但是我们不需要担心truncation和corruption，因为：
+* Header checksum (IP)
+* Data checksum (UDP)
 
 
 
@@ -484,7 +493,13 @@ Host: cs144.keithw.org # host part,`https://`和第三个slash之间的部分
 tcp.port == 90 and ip.addr== XXX
 ```
 
+课程作业：
 
+1.Ping
+
+2.SMTP
+
+3.Traceroute
 
 
 
