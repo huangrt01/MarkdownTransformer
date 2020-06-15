@@ -185,12 +185,18 @@ Addressing Problem: 一个host对应多个IP地址，不容易对应
 <img src="Computer-Networking-Lecture-CS144-Stanford/007.jpg" alt="ARP" style="zoom:60%;" />
 
 e.g. 
-* hardware:1(Ethernet)
-* protocol: 0x0800(IP)
-* hardware length:6 (48 bit Ethernet)
-* protocol length:4(32 bit IP)
-* opcode: 1(request) /2(reply)
-* Destination: broadcast (ff:ff:ff:ff:ff:ff)
+
+hardware:1(Ethernet)
+
+protocol: 0x0800(IP)
+
+hardware length:6 (48 bit Ethernet)
+
+protocol length:4(32 bit IP)
+
+opcode: 1(request) /2(reply)
+
+Destination: broadcast (ff:ff:ff:ff:ff:ff)
 
 ##### 1-12 recap
 
@@ -280,12 +286,15 @@ Paradox of airplanes
 * UDP header有length字段，而TCP没有，因为TCP对空间要求高，用隐含的方式计算length
 * port demultiplexing, connectionless, unreliable
 
-应用
-* DNS: domain name system，因为request全在单个datagram里
-* DHCP: Dynamic Host Configuration Protocol
-  * new host在join网络时得到IP
-  * 连WiFi
-* 对重传、拥塞控制、in-sequence delivery有special needs的应用，比如音频，但现在UDP不像以前用的那么多，因为很多是http，基于TCP。
+**应用**
+
+DNS: domain name system，因为request全在单个datagram里
+
+DHCP: Dynamic Host Configuration Protocol
+* new host在join网络时得到IP
+* 连WiFi
+
+对重传、拥塞控制、in-sequence delivery有special needs的应用，比如音频，但现在UDP不像以前用的那么多，因为很多是http，基于TCP。
 
 ##### 2-3 The Internet Control Message Protocol (ICMP) Service Model
 report errors and diagnoise problems about network layer
@@ -300,6 +309,7 @@ Message的意义见RFC 792
 
 应用于traceroute: 
 * 核心思想：连续发送TTL从1开始递增的UDP，期待回复的11 0(TTL expires)
+  * Source is random and different for each; destination starts with arandom number and increases by one for each
 * 由于路由选择问题，traceroute 无法保证每次到同一个主机经过的路由都是相同的。
 * traceroute 发送的 UDP 数据报端口号是大于 30000 的。如果目的主机没有任何程序使用该端口，主机会产生一个3 3(端口不可达)ICMP报文给源主机。
 
@@ -475,6 +485,7 @@ packets和datagrams是两个核心概念，datagrams为了明确目的地，在�
 
 ##### potpourri
 * RFC 792: ICMP Message
+* RFC 821: SMTP
 * [RFC 1958](https://datatracker.ietf.org/doc/rfc1958/?include_text=1):Architectural Principles of the Internet
 * [RFC 2606](https://datatracker.ietf.org/doc/rfc2606/): localhost
 * [RFC 6298](https://datatracker.ietf.org/doc/rfc6298/?include_text=1): Computing TCP's Retransmission Timer
@@ -491,15 +502,19 @@ GET /hello HTTP/1.1 # path part,第三个slash后面的部分
 Host: cs144.keithw.org # host part,`https://`和第三个slash之间的部分
 
 tcp.port == 90 and ip.addr== XXX
+tcp.len > 0
+ip.ttl == XXX
+icmp.code == 0
 ```
 
 课程作业：
 
 1.Ping
 
-2.SMTP
+2.SMTP：在TCP上层
 
 3.Traceroute
+* VM的第一跳是到laptop，不会decrement the TTL，因此hop 10对应TTL 9
 
 
 
