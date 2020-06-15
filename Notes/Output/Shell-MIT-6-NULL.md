@@ -806,7 +806,7 @@ find . -name '*.png' -exec convert {} {.}.jpg \;
 * nohup
 #### o 
 
-* open: -n用来多开，比如`open -n /Applications/Wireshark.app`
+* open: -n用来多开，比如``
 
 #### p
 * [pandoc](https://github.com/jgm/pandoc)
