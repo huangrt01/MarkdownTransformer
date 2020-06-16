@@ -1488,7 +1488,9 @@ void rwlock_release_writelock(rwlock_t *rw) {
 
 weak semaphore和strong semaphore：strong semaphore能确保在一个wait线程之前唤醒的线程数量有界
 
-no-starve-mutex的目的是用weak semaphore实现no starving，具体实现非常巧妙，设两个room，轮流全部倒出，这样不会有单线程的loop。状态转移图如下，t1和t2是信号量。
+no-starve-mutex的目的是基于weak semaphore实现no starving，具体实现非常巧妙，设两个room，轮流全部倒出，这样就不会出现单线程的loop。
+
+t1、t2和mutex三个信号量，状态转移图如下：
 
 <img src="https://raw.githubusercontent.com/huangrt01/Markdown-Transformer-and-Uploader/master/Notes/OSTEP-Operating-Systems-Three-Easy-Pieces/no-starve-mutex.jpeg" alt="进程状态转移" style="zoom:50%;" />
 
