@@ -286,7 +286,7 @@ Host github.com
 * 建立仓库
 ```
 git init
-git remote add origin git@github.com:huangrt01@163.com/dotfiles.git
+git remote add origin git@github.com:huangrt01/dotfiles.git
 git pull --rebase origin master
 git push --set-upstream origin master
 ```
