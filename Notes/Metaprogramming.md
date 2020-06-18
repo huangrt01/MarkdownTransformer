@@ -70,7 +70,8 @@ $(SUBDIRS):
 foo: baz
 ```
 
-
+* 配合[git ls-files](https://git-scm.com/docs/git-ls-files)，写make的[标准targets](https://www.gnu.org/software/make/manual/html_node/Standard-Targets.html#Standard-Targets)
+* 可以利用`.git/hooks`中的[`pre-commit`](https://git-scm.com/docs/githooks#_pre_commit)在每次commit之前make特定的文件
 
 ### Dependency management
 概念：repository, versioning, version number, [semantic versioning](https://semver.org/)
@@ -78,6 +79,7 @@ foo: baz
 - If a new release does not change the API, increase the patch version.
 - If you *add* to your API in a backwards-compatible way, increase the minor version.
 - If you change the API in a non-backwards-compatible way, increase the major version.
+- [Rust's build system](https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html)，可帮助理解版本号以及dependency管理
 
 lock file: a file that lists the exact version you are *currently* depending on of each dependency
 
@@ -99,6 +101,17 @@ makedepend工具能帮助寻找依赖
 - Integration test: a “macro-test” that runs a larger part of the system to check that different feature or components work *together*.
 - Regression test: a test that implements a particular pattern that *previously* caused a bug to ensure that the bug does not resurface.
 - Mocking: the replace a function, module, or type with a fake implementation to avoid testing unrelated functionality. For example, you might “mock the network” or “mock the disk”.
+
+### Github Pages
+1. Set up a simple auto-published page using [GitHub Pages](https://help.github.com/en/actions/automating-your-workflow-with-github-actions). Add a [GitHub Action](https://github.com/features/actions) to the repository to run `shellcheck` on any shell files in that repository (here is [one way to do it](https://github.com/marketplace/actions/shellcheck)). Check that it works!
+2. [Build your own](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/building-actions) GitHub action to run [`proselint`](http://proselint.com/) or [`write-good`](https://github.com/btford/write-good) on all the `.md` files in the repository. Enable it in your repository, and check that it works by filing a pull request with a typo in it.
+
+
+
+个人blog的建立：
+
+调研之后决定用动态blog，[halo](https://halo.run/)是傻瓜式操作，[在阿里云上部署](https://blog.csdn.net/weixin_43160252/article/details/104864279)
+
 
 
 
