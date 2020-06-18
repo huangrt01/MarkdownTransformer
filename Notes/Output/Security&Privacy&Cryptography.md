@@ -1,13 +1,8 @@
-## Cryptography I, Stanford University, Dan Boneh
+## Security&Privacy&Cryptography
 
-* [coursera课程](https://www.coursera.org/learn/crypto/home/welcome)
-* [密码学资源推荐](https://blog.cryptographyengineering.com/useful-cryptography-resources/)
-* [A Graduate Course In Applied Cryptography](https://toc.cryptobook.us/)
-* [A Computational Introduction to Number Theory and Algebra](https://www.shoup.net/ntb/)
+### 密码学在计算机领域的应用
 
-#### 密码学在计算机领域的应用
-
-##### hash function原理
+#### hash function原理
 
 ```c++
 int sum=0; 
@@ -29,7 +24,7 @@ return sum;
 
   * 哈希算法可能用到乘除法。模素数的剩余系除去 0 ，这个集合关于乘法构成群。只有群才能保证每个元素都有逆元，除法才能合法。假设要计算 (p / q) mod m，如果想让结果与 (p mod m) / (q mod m) 相等，必须令 m 为素数，否则逆元求不出来。
 
-##### hash function应用
+#### hash function应用
 * Git中的id是由SHA-1 hash生成，40个16进制字符
   * SHA-1: 160bit 
   * SHA-2: 有不同位数，比如SHA-256
@@ -64,7 +59,7 @@ E-mail is particularly problematic, even if PGP signed. It’s not generally for
 
 File security is hard, and operates on many level. What is it you’re trying to secure against?
 
-[![$5 wrench](Cryptography I, Stanford University, Coursera/security.png)](https://xkcd.com/538/)
+[![$5 wrench](https://raw.githubusercontent.com/huangrt01/Markdown-Transformer-and-Uploader/master/Notes/Security&Privacy&Cryptography/security.png)](https://xkcd.com/538/)
 
 - Offline attacks (someone steals your laptop while it’s off): turn on full disk encryption. ([cryptsetup + LUKS](https://wiki.archlinux.org/index.php/Dm-crypt/Encrypting_a_non-root_file_system) on Linux, [BitLocker](https://fossbytes.com/enable-full-disk-encryption-windows-10/) on Windows, [FileVault](https://support.apple.com/en-us/HT204837) on macOS. Note that this won’t help if the attacker *also* has you and really wants your secrets.
 
@@ -98,6 +93,14 @@ Install [HTTPS Everywhere](https://www.eff.org/https-everywhere). SSL/TLS is [cr
 Install [uBlock Origin](https://github.com/gorhill/uBlock). It is a [wide-spectrum blocker](https://github.com/gorhill/uBlock/wiki/Blocking-mode) that doesn’t just stop ads, but all sorts of third-party communication a page may try to do. And inline scripts and such. If you’re willing to spend some time on configuration to make things work, go to [medium mode](https://github.com/gorhill/uBlock/wiki/Blocking-mode:-medium-mode) or even [hard mode](https://github.com/gorhill/uBlock/wiki/Blocking-mode:-hard-mode). Those *will* make some sites not work until you’ve fiddled with the settings enough, but will also significantly improve your online security.
 
 If you’re using Firefox, enable [Multi-Account Containers](https://support.mozilla.org/en-US/kb/containers). Create separate containers for social networks, banking, shopping, etc. Firefox will keep the cookies and other state for each of the containers totally separate, so sites you visit in one container can’t snoop on sensitive data from the others. In Google Chrome, you can use [Chrome Profiles](https://support.google.com/chrome/answer/2364824) to achieve similar results.
+
+
+### Cryptography I, Stanford University, Dan Boneh
+
+* [coursera课程](https://www.coursera.org/learn/crypto/home/welcome)
+* [密码学资源推荐](https://blog.cryptographyengineering.com/useful-cryptography-resources/)
+* [A Graduate Course In Applied Cryptography](https://toc.cryptobook.us/)
+* [A Computational Introduction to Number Theory and Algebra](https://www.shoup.net/ntb/)
 
 ##### Inbox:
 
