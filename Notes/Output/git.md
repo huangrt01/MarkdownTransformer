@@ -128,8 +128,10 @@ git rm README.md
 git add README
 ```
 
-
 ##### Branching and merging
+
+思考git的原理，commit的组成
+
 - `git branch`: shows branches
 - `git branch <name>`: creates a branch
 - `git checkout -b <name>`: creates a branch and switches to it
