@@ -1,5 +1,4 @@
 ### Git
-[toc]
 
 * [Pro Git](https://git-scm.com/book/en/v2)
 * [MIT 6.NULL - git](https://missing.csail.mit.edu/2020/version-control/)
