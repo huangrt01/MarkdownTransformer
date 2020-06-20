@@ -101,6 +101,7 @@ def load_reference(name_or_id):
   - `-p`显示全部信息，`-3`显示三条
   - `--stat`显示统计信息
   - `-S function_name --since=2.weeks --before="2008-11-01" --grep --author --committer --no-merges`
+  - `--all`显示所有branch信息, 或者指定特定的branch
 - `git diff`: 比较working directory和staging area
   - `git diff --staged'：比较staging area和last commit
   - `git diff <filename>`: show differences since the last commit
@@ -132,13 +133,21 @@ git add README
 
 思考git的原理，commit的组成
 
+branch的成本极低，instantaneous
+
 - `git branch`: shows branches
 - `git branch <name>`: creates a branch
+  - `git branch -d` 删除branch 
 - `git checkout -b <name>`: creates a branch and switches to it
   - same as `git branch <name>; git checkout <name>`
+  - checkout需要所有changes已经commit，或者参考[Stashing and Cleaning](https://git-scm.com/book/en/v2/ch00/_git_stashing)
   - `git checkout <tag>`会进入detached HEAD状态，做的commit只属于这一个commit
-- `git merge <revision>`: merges into current branch
+- `git merge <revision>`: merges into current branch, merge的不同策略如下：
+  * Fast-forward，直接在当前commit上遍历即可
+  * recursive strategy: three-way merge
+  * 如果发生冲突，手动修改unmerged files然后add ，或者用mergetool
 - `git mergetool`: use a fancy tool to help resolve merge conflicts
+  
 - `git rebase`: rebase set of patches onto a new base
 
 ##### Remotes
