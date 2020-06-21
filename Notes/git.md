@@ -133,42 +133,86 @@ git add README
 
 思考git的原理，commit的组成
 
+branch的使用方式：1.Long-Running Branches 2.Topic Branches
+
 branch的成本极低，instantaneous
 
 - `git branch`: shows branches
+  - `-v` verbose
+  - `--merged` 和`--no-merged`
 - `git branch <name>`: creates a branch
+  
   - `git branch -d` 删除branch 
 - `git checkout -b <name>`: creates a branch and switches to it
   - same as `git branch <name>; git checkout <name>`
   - checkout需要所有changes已经commit，或者参考[Stashing and Cleaning](https://git-scm.com/book/en/v2/ch00/_git_stashing)
   - `git checkout <tag>`会进入detached HEAD状态，做的commit只属于这一个commit
+  
+- `git checkout --track origin/serverfix`: 创建本地分支并track远程分支 
 - `git merge <revision>`: merges into current branch, merge的不同策略如下：
   * Fast-forward，直接在当前commit上遍历即可
   * recursive strategy: three-way merge
   * 如果发生冲突，手动修改unmerged files然后add ，或者用mergetool
 - `git mergetool`: use a fancy tool to help resolve merge conflicts
-  
 - `git rebase`: rebase set of patches onto a new base
+  - `git rebase <basebranch> <topicbranch>`
+rebase命令找到共同的祖先节点，然后按顺序replay commits
+
+```shell
+git checkout experiment
+git rebase master   # <=> git rebase master experiment
+git checkout master
+git merge experiment
+```
+
+`git rebase --onto master server client`
+
+This basically says, “Take the `client` branch, figure out the patches since it diverged from the `server` branch, and replay these patches in the `client` branch as if it was based directly off the `master` branch instead.” It’s a bit complex, but the result is pretty cool.
+
+Do not rebase commits that exist outside your repository and that people may have based work on. 会发生混淆，尤其是别人能重新把已经被rebase消除掉的commits push上来的时候，可能会fetch到存在冲突的experiment分支
+* 如果遇到了这种问题，可以`git fetch & git rebase experiment`或直接`git pull --rebase`
+
+总结：`rebase`和`filter-branch`本质上是在tell storys，呈现给读者可读性更强的历史记录
+
+
 
 ##### Remotes
+
+tracking branch的缩写：`@{u}或@{upstream}`
+
 - `git remote`: list remotes
+  - `-v` 
 - `git remote add <name> <url>`: add a remote
   - name本质上是reference 
 - `git remote show/rename/rm <remote>`
+  - `git ls-remote <remote>` 
 - `git push <remote> <local branch>:<remote branch>`: send objects to remote, and update remote reference
   * `git push origin lab1:lab1`
   * `git push --set-upstream origin my-branch`，本地关联远程分支，用来省略上面一行的分支标注
 - `git branch --set-upstream-to=<remote>/<remote branch>`: set up correspondence between local and remote branch
+  - 相当于 `-u`
 - `git fetch <remote>`: retrieve objects/references from a remote
+  - `git fetch origin` 
 ```shell
 git fetch origin master:tmp
 git diff tmp
 git merge tmp
 git branch -d tmp
 ```
+```shell
+git fetch --all
+git branch -vv
+git push origin --delete serverfix
+```
+
 - `git pull`: same as `git fetch; git merge`
 - `git clone`: download repository from remote
   - 在最后可加文件夹名参数 
+  - `-o` 修改origin name
+
+fetch只能得到远程新分支的引用，如果想得到实体：
+* `git merge origin/serverfix`
+* `git checkout -b serverfix origin/serverfix`
 
 ##### Undo
 - `git commit --amend`: edit a commit's contents/message, 可把staging area加到上一次commit里
