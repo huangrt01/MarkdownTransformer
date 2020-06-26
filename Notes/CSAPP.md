@@ -22,6 +22,8 @@ ECF：e.g. hardware timer, packet arrived, request data from disk and sleep unti
   * trap - 2.
   * fault - 1. or 3.
   * abort - 3.
+  
+* 思考：返回到$I_{next}$的情形值得注意，例如一个空的handler可以中断sleep。是否可能会丢失一些需要curr指令处理的状态，然后出现不可预知的问题？
 * exception number, exception table base register
 
 exception和procedure call的区别
