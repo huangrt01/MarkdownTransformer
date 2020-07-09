@@ -445,7 +445,7 @@ cat .ssh/id_ed25519.pub | ssh foobar@remote 'cat >> ~/.ssh/authorized_keys'
     * <img src="Shell-MIT-6-NULL/001.png" alt="Local Port Forwarding" style="zoom:100%;" />
   * Remote Port Forwarding
     * <img src="Shell-MIT-6-NULL/002.png" alt="Remote Port Forwarding" style="zoom:100%;" />
-* `ssh -K`: 穿越服务器，打开GSSAPIDelegateCredentials，可转存tgt
+* `ssh -K`: 穿越服务器，打开GSSAPIDelegateCredentials, 可转存tgt
 * ssh configuration: `~/.ssh/config`，server side: `/etc/ssh/sshd_config`，调端口、X11 forwarding等
 ```shell
 Host vm
