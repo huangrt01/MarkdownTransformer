@@ -56,6 +56,8 @@ tensors存在backing store buffers
 
 分布式实现：per subgraph per device, TCP or RDMA
 
+* device层面自然地形成CPU和GPU的并行
+
 **4.Extensions**
 
 4.1 Gradient Computation
