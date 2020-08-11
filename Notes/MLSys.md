@@ -1,4 +1,8 @@
-## TensorFlow Internals
+NCCL, Horovod, BytePS, Mesh-TensorFlow, Gpipe, Ray, HugeCTR, DALI
+
+### TensorFlow Internals
+
+[toc]
 
 #### chpt1: 介绍
 
@@ -14,10 +18,7 @@ TensorFlow: 延迟计算、原子OP、抽象设备（CPU、GPU、ASIC）、抽�
 https://www.tensorflow.org/install/source#ubuntu
 
 
-
-
-
-##### TensorFlow: Large-Scale Machine Learning on Heterogeneous Distributed Systems [2015]
+#### TensorFlow: Large-Scale Machine Learning on Heterogeneous Distributed Systems [2015]
 
 node对应operation
 
@@ -135,27 +136,37 @@ tensors存在backing store buffers
 
 9.2 Performance Tracing: EEG
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #### 附录A：代码阅读
 
 * 发现领域模型
 * 抛开细枝末节： `git checkout -b code-reading`
 * 适可而止，BFS阅读
 
+#### OneFlow: 大规模分布式深度学习框架
+
+数据并行：allreduce + PS
+
+模型并行：参数如何划分？复杂的通信模式
+
+![截屏2020-08-1110.44.20](MLSys/截屏2020-08-1110.44.20.jpg)
+
+横向拓展：片间高速互联，e.g. TPU
+
+纵向拓展：单个芯片从通用到专用
 
 
 
+静态调度与流式执行系统![截屏2020-08-1110.55.07](MLSys/截屏2020-08-1110.55.07.jpg)
 
+
+
+OneFlow架构
+
+* actor及流水线
+  * 内存槽，用类似rust的ownership解决内存冲突问题，ownership随状态转移
+
+![截屏2020-08-1111.00.58](MLSys/截屏2020-08-1111.00.58.jpg)
+
+* node placement: consistent view
+  * SBP, 在op层面实现数据和模型并行 
+![截屏2020-08-1111.10.09](MLSys/截屏2020-08-1111.10.09.jpg)
