@@ -71,7 +71,7 @@ gdb：c(continue), l(ist), s(tep), n(ext), b(reak), p(rint), r(eturn), run, q(ui
 (gdb) p ((matrix::io::ModelMeta*)model_meta)->meta_
   
 //显示vector内部值
-(gdb) p ((FetchPSContext*) *(fetchps_ctxs_._M_impl._M_start+0))->model_configs
+(gdb) p ((FetchPsContext*) *(fetch_ps_ctxs_._M_impl._M_start+0))->model_configs
 
 ```
 
