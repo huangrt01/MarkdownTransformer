@@ -1,4 +1,4 @@
-NCCL, Horovod, BytePS, Mesh-TensorFlow, Gpipe, Ray, HugeCTR, DALI
+plethora of ML frameworks：NCCL, Horovod, BytePS, Mesh-TensorFlow, Gpipe, Ray, HugeCTR, DALI
 
 ### TensorFlow Internals
 
@@ -142,7 +142,7 @@ tensors存在backing store buffers
 * 抛开细枝末节： `git checkout -b code-reading`
 * 适可而止，BFS阅读
 
-#### OneFlow: 大规模分布式深度学习框架
+### OneFlow: 大规模分布式深度学习框架
 
 数据并行：allreduce + PS
 
@@ -172,7 +172,7 @@ OneFlow架构
 ![截屏2020-08-1111.10.09](MLSys/截屏2020-08-1111.10.09.jpg)
 
 
-#### Ray: 动态可编程分布式计算框架
+### Ray: 动态可编程分布式计算框架
 
 1.Ray是一个动态可编程的分布式计算框架，支持分布式训练，主要体现在以下几方面：
 
@@ -181,6 +181,8 @@ OneFlow架构
 灵活训练规划pipeline（用户可以在Actor里自定义逻辑，包括循环、计时器等）
 
 灵活数据源（流批处理融合，支持简单的数据处理chain）
+
+One-off system：针对RL任务的特化，1）training, serving, simulation一体化，2）dynamic execution。但这些能力我们的推荐系统不一定需要
 
 2.目前工业界主要使用Ray的方式分两种，一是用Ray的上游生态lib，二是用Ray的底层能力深入自研框架
 
@@ -215,3 +217,12 @@ Ray是用户友好的分布式计算框架，具体体现在
 官方doc：https://docs.ray.io/en/latest/installation.html
 
 开源史海钩沉系列 [1] Ray：分布式计算框架 - 高策的文章 - 知乎 https://zhuanlan.zhihu.com/p/104022670
+
+
+
+**读论文**：
+结合Bulk-synchronous parallel systems和Task-parallel systems这两类系统
+
+无状态和有状态
+
+* In contrast stateful computations are a good fit for implementing parameter servers, performing repeated computation on GPU-backed data, or running third-party simulators that do not expose their state.
