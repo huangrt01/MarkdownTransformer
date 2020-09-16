@@ -154,7 +154,7 @@ if __name__ == "__main__":
             image_folder_path = curfile.parent/(curfile.stem)
             mtime = os.stat(curfile).st_mtime
             outputfile=Path(curfile.parent/"Output"/(curfile.stem+".md"))
-            if args.input=='all' or ((not outputfile.is_file())or mtime > os.stat(outputfile).st_mtime):
+            if args.input == 'all' or ((not outputfile.is_file())or mtime > os.stat(outputfile).st_mtime):
                 process_for_zhihu()
     else:
         curfile = Path(args.input)
