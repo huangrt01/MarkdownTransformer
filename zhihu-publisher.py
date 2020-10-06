@@ -43,7 +43,6 @@ def process_for_zhihu():
             git_ops()
 
 # Deal with the formula and change them into Zhihu original format
-# 也可以用https://www.zhihu.com/equation?tex=
 def formula_ops(_lines):
      # _lines = re.sub('((.*?)\$\$)(\s*)?([\s\S]*?)(\$\$)\n',
     #                 '\n<img src="http://latex.codecogs.com/gif.latex?\\4" alt="\\4" class="ee_img tr_noresize" eeimg="1">\n', _lines)
@@ -68,12 +67,12 @@ def rename_image_ref1(m):
     result = '<img src="https://www.zhihu.com/equation?tex='+quote(m.group(1))+'" alt'
     return result
 
-# The support function for image_ops. It will take in a matched object and make sure they are competible
+# The support function for image_ops. It will take in a matched object and make sure they are compatible
 def rename_image_ref(m, original=True):
     global image_folder_path
     if not (Path(image_folder_path.parent/m.group(1)).is_file() or Path(image_folder_path.parent/m.group(2)).is_file()):
         return m.group(0)
-    if os.path.getsize(image_folder_path.parent/m.group(1+int(original)))>COMPRESS_THRESHOLD:
+    if args.compress and os.path.getsize(image_folder_path.parent/m.group(1+int(original)))>COMPRESS_THRESHOLD:
         if original:
             image_ref_name = Path(m.group(2)).stem+".jpg"
         else:
