@@ -660,6 +660,8 @@ Popular services include [Amazon AWS](https://aws.amazon.com/), [Google Cloud](h
 #### a
 * awk: 一种控制台编程工具，寻找和处理pattern
   * 入门[wiki](https://zh.wikipedia.org/wiki/AWK)
+  * 数据统计算均值
+    * `awk -F'[ ,]+' '{print  <img src="https://www.zhihu.com/equation?tex=1%2C" alt="1," class="ee_img tr_noresize" eeimg="1"> 3, <img src="https://www.zhihu.com/equation?tex=5%2C" alt="5," class="ee_img tr_noresize" eeimg="1"> 7}' | awk '{ for (i=1; i<=NF; i++) { sum[i]+= $i }} END { for (i=1; i<=NF; i++) {printf "%.9f ", sum[i]/NR}}'`，`-F'[]'`内空格和逗号都是分隔符，`+`表示将连续分隔符视为一个
   * `awk ' <img src="https://www.zhihu.com/equation?tex=NF%21~/%5C.so/%7Bnext%7D%20%7B" alt="NF!~/\.so/{next} {" class="ee_img tr_noresize" eeimg="1"> 0= <img src="https://www.zhihu.com/equation?tex=NF%7D%20%21a%5B" alt="NF} !a[" class="ee_img tr_noresize" eeimg="1"> 0]++' /proc/1585728/maps`
     * `$NF!~/\.so/{next}` – If the last column doesn’t contain “*.so*“, we ignore it
     * `{ <img src="https://www.zhihu.com/equation?tex=0%3D" alt="0=" class="ee_img tr_noresize" eeimg="1"> NF}` - If the last column contains a shared library, we replace the line by the last column, which is the filename of the library
