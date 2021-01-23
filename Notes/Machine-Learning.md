@@ -1,6 +1,6 @@
-### Machine Learning
+## Machine Learning
 
-#### Bert
+### Bert
 
 model finetune
 
@@ -24,7 +24,7 @@ model finetune
 
 
 
-#### Fundamentals of Deep Learning -- nvidia
+### Fundamentals of Deep Learning -- nvidia
 
 [MNIST](http://yann.lecun.com/exdb/mnist/)
 
@@ -402,4 +402,87 @@ seed_texts = [
 for seed in seed_texts:
     print(generate_headline(seed, next_words=5))
 ```
+
+
+
+### 用多GPU训练神经网络 -- Nvidia
+
+* 与梯度下降法不同，随机梯度下降法并不使用整个数据集而是使用较小的数据子集（称为一个批次，即batch；其大小称为 batch size）来计算损失函数。这对我们算法的性能有着深远的影响。由于每个批次里的数据是从数据集里随机抽取的，所以每个批次的数据集都不相同。即使对于同一组权重，这些批次的数据集也会提供不同的梯度，引入一定程度的噪声
+* 这种噪声实际上是非常有益的，因为它所产生的极小值的数学特性与梯度下降大相径庭。这在多 GPU 训练问题中之所以重要，是因为通过增加参与训练过程的 GPU 数量，我们实际上加大了批量（batch size），而这会导致减少有益的噪声
+
+```python
+# This section generates the training dataset as defined by the variables in the section above.
+x = np.random.uniform(0, 10, n_samples)
+y = np.array([w_gen * (x + np.random.normal(loc=mean_gen, scale=std_gen, size=None)) + b_gen for x in x])
+
+# Create the placeholders for the data to be used.
+X = tf.placeholder(tf.float32, name="X")
+Y = tf.placeholder(tf.float32, name="Y")
+
+# Create our model variables w (weights; this is intended to map to the slope, w_gen) and b (bias; this maps to the intercept, b_gen).
+# For simplicity, we initialize the data to zero.
+w = tf.Variable(0.0, name="weights")
+b = tf.Variable(0.0, name="bias")
+
+# Define our model. We are implementing a simple linear neuron as per the diagram shown above.
+Y_predicted = w * X + b
+
+# Define a gradient descent optimizer
+optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.001).minimize(loss)
+
+# Define the maximum number of times we want to process the entire dataset (the number of epochs).
+# In practice we won't run this many because we'll implement an early stopping condition that
+# detects when the training process has converged.
+max_number_of_epochs = 1000
+
+# We still store information about the optimization process here.
+loss_array = []
+b_array = []
+w_array = []
+    
+with tf.Session() as sess:
+    # Initialize the necessary variables
+    sess.run(tf.global_variables_initializer())
+    # Print out the parameters and loss before we do any training
+    w_value, b_value, loss_value = sess.run([w, b, loss], feed_dict={X: x, Y: y})
+    print("Before training: w = {:4.3f}, b = {:4.3f}, loss = {:7.3f}".format(w_value, b_value, loss_value))
+    print("")
+    print("Starting training")
+    print("")
+    # Start the training process
+    for i in range(max_number_of_epochs):
+        # Use the entire dataset to calculate the gradient and update the parameters
+        sess.run(optimizer, feed_dict={X: x, Y: y})
+        # Capture the data that we will use in our visualization
+        w_value, b_value, loss_value = sess.run([w, b, loss], feed_dict={X: x, Y: y})
+        w_array.append(w_value)
+        b_array.append(b_value)
+        loss_array.append(loss_value)
+        # At the end of every few epochs print out the learned weights
+        if (i + 1) % 5 == 0:
+            print("Epoch = {:2d}: w = {:4.3f}, b = {:4.3f}, loss = {:7.3f}".format(i+1, w_value, b_value, loss_value))
+        # Implement your convergence check here, and exit the training loop if
+        # you detect that we are converged:
+        if FIXME: # TODO
+            break
+    print("")
+    print("Training finished after {} epochs".format(i+1))
+    print("")
+    
+    print("After training: w = {:4.3f}, b = {:4.3f}, loss = {:7.3f}".format(w_value, b_value, loss_value))
+```
+
+```python
+# adjust batch size
+batch_size = 32
+num_batches_in_epoch = (n_samples + batch_size - 1) // batch_size
+```
+
+
+
+研究训练速度和 batch_size 的关系
+
+* 非常小或非常大的批量对于模型训练的收敛来说可能不是的最佳选择（非常小的批量带来的噪声往往过于嘈杂而无法使模型充分收敛到损失函数的最小值，而非常大的批量则往往造成训练的早期阶段就发散）
+* 观察到大batch size的val_acc和acc很接近，不容易过拟合，但后期准确度效果提升缓慢
+* Machine-Learning/GPU_training_batch_size.py 
 
