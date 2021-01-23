@@ -806,6 +806,7 @@ gunzip -v -S "mygz" 1.mygz # 按指定后缀名解压
 #### v
 #### w
 * wait：`wait pid`，不加pid则等待所有进程
+* `watch -n 5 $cmd`
 * which：找到程序路径
 * [wget](https://blog.csdn.net/wangshuminjava/article/details/79916655): 断点续传-c    后台-b
 

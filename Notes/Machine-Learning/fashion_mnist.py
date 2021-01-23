@@ -1,5 +1,5 @@
 ''' result
-
+1 * V100
 target-accuracy:0.82, patience:2
 batch_size:         8       16      32       64      128      256       512    
 Images/sec:         368.14  592.57  807.31   950.8   1069.37  1139.87   1174.37
