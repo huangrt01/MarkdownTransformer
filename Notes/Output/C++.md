@@ -1136,12 +1136,24 @@ Dijkstra反对goto的[文章](http://www.cs.utexas.edu/users/EWD/ewd02xx/EWD215.
 
 getopt函数处理参数，用法参照[tsh.c](https://github.com/huangrt01/CSAPP-Labs/blob/master/shlab-handout/tsh.c)
 
+
+
 ##### 结构体
 
 结构体内存分配问题：内存对齐
 * 起始地址为该变量的类型所占的整数倍，若不足则不足部分用数据填充至所占内存的整数倍。
 * 该结构体所占内存为结构体成员变量中最大数据类型的整数倍。
 * e.g.: 1+4+1+8->4+4+8+8=24
+
+
+##### 宏
+
+[C++宏编程，不错的一篇blog](http://notes.tanchuanqi.com/language/cpp/cpp_micro.html)
+
+* do while(0) 技巧
+
+
+
 
 #### C++的特性
 面向对象、构造函数、析构函数、动态绑定、内存管理
