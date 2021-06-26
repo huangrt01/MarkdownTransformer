@@ -274,7 +274,7 @@ Feature Selection method based on feature Complexity and variational Dropout (FS
 * 数学手段：
   * 公式(3)，损失函数，参数z的正则化
     * 特征复杂度越大，正则项系数越大
-    * 损失函数及正则化系数的推导（附录）
+    * 损失函数及正则化系数的推导（见附录）
   * 公式(5)，Bernoulli 分布的平滑化
 
 2.2 Fine-Tuning the Pre-Ranking Model
