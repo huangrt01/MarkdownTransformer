@@ -851,6 +851,15 @@ gunzip -v -S "mygz" 1.mygz # 按指定后缀名解压
 * netstat 
   * `netstat -anp | grep tcp6` 查 ipv6 监听
 * nohup
+  * [如何优雅地让Python程序在后台运行](https://atomlab.org/post/code/python-background/)
+```shell
+# 将标准输出放到name.log中，并且记录该进程的pid到run.pid中
+nohup python -u scripts.py > name.log 2>&1 & echo $! > run.pid
+
+# 若存在run.pid文件，则加载它并杀掉该进程
+[[ -f run.pid ]] && kill $(cat run.pid)
+```
+
 #### o 
 
 * open: -n用来多开，比如``
