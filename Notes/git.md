@@ -340,7 +340,7 @@ git config --global user.email huangrt01@163.com
 # MacOs
 ssh-keygen -t rsa -b 4096 -C "huangrt01@163.com" # 如果rsa已占用，可用ssh-keygen -t ed25519 -C "huangruiteng@xxx.com"
 eval "$(ssh-agent -s)"
-ssh-add ~/.ssh/id_rsa # MacOS带-K
+ssh-add ~/.ssh/id_rsa # MacOS带--apple-use-keychain (-K)
 pbcopy < ~/.ssh/id_rsa.pub  # MacOS , Linux用xclip
 # 上github添加SSH Key
 ssh -T git@github.com
