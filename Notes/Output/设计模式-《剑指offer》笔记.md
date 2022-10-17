@@ -15,9 +15,9 @@
 * 现场面试：准备几个问题
 * 行为面试->技术面试->应聘者提问
 
-<img src="《剑指offer》笔记/001.jpg" alt="001" style="zoom:50%;" />
+<img src="https://raw.githubusercontent.com/huangrt01/Markdown-Transformer-and-Uploader/mynote/Notes/设计模式-《剑指offer》笔记/001.jpg" alt="001" style="zoom:50%;" />
 
-<img src="《剑指offer》笔记/002.jpg" alt="002" style="zoom:50%;" />
+<img src="https://raw.githubusercontent.com/huangrt01/Markdown-Transformer-and-Uploader/mynote/Notes/设计模式-《剑指offer》笔记/002.jpg" alt="002" style="zoom:50%;" />
 
 * 技能：了解、熟悉、精通
 * 常考点：链表、二叉树、快排
@@ -162,15 +162,15 @@ public:
 ##### 19. [正则表达式匹配](https://leetcode-cn.com/problems/zheng-ze-biao-da-shi-pi-pei-lcof/) 
 * [leetcode 10.](https://leetcode-cn.com/problems/regular-expression-matching)
 * 和0072.Edit-Space类似
-$$
-d[i][j]=\begin{cases}
+
+<img src="https://www.zhihu.com/equation?tex=d%5Bi%5D%5Bj%5D%3D%5Cbegin%7Bcases%7D%0Ad%5Bi-1%5D%5Bj-1%5D%26%20p%5Bj%5D%3D%27.%27%5C%5C%0As%5Bi%5D%20%3D%3D%20p%5Bj%5D%5Cquad%20%5C%26%5C%26%20%5Cquad%20d%5Bi%20-%201%5D%5Bj%20-%201%5D%20%26%20p%5Bj%5D%3Da%5C%5C%0Ad%5Bi%5D%5Bj%20-%202%5D%5Cquad%20%7C%7C%5Cquad%20d%5Bi-1%5D%5Bj%5D%20%26%20p%5Bj-1%3Aj%5D%3D%27.%2A%27%5C%5C%0Ad%5Bi%5D%5Bj%20-%202%5D%5Cquad%20%7C%7C%5Cquad%20%28d%5Bi-1%5D%5Bj%5D%5Cquad%20%5C%26%5C%26%5Cquad%20s%5Bi%5D%3D%3Dp%5Bj-1%5D%29%20%20%20%20%20%20%26%20p%5Bj-1%3Aj%5D%3D%27a%2A%27%0A%5Cend%7Bcases%7D%0A%5Cnotag%0A" alt="d[i][j]=\begin{cases}
 d[i-1][j-1]& p[j]='.'\\
 s[i] == p[j]\quad \&\& \quad d[i - 1][j - 1] & p[j]=a\\
 d[i][j - 2]\quad ||\quad d[i-1][j] & p[j-1:j]='.*'\\
 d[i][j - 2]\quad ||\quad (d[i-1][j]\quad \&\&\quad s[i]==p[j-1])      & p[j-1:j]='a*'
 \end{cases}
 \notag
-$$
+" class="ee_img tr_noresize" eeimg="1">
 
 ##### 20.[表示数值的字符串](https://leetcode-cn.com/problems/biao-shi-shu-zhi-de-zi-fu-chuan-lcof)
 * [leetcode 65.](https://leetcode-cn.com/problems/valid-number/)
