@@ -1,5 +1,9 @@
 ### 设计模式
 
+* IOC(Inversion of Control，控制反转): 面向对象编程中的一种设计原则，可以用来减低计算机代码之间的耦合度。其中最常见的方式叫做依赖注入（Dependency Injection，简称DI），还有一种方式叫“依赖查找”（Dependency Lookup）
+  * 依赖注入和依赖查找，两者的区别在于，前者是被动的接收对象，在类A的实例创建过程中即创建了依赖的B对象，通过类型或名称来判断将不同的对象注入到不同的属性中，而后者是主动索取相应类型的对象，获得依赖对象的时间也可以在代码中自由控制。
+
+
 ### 《剑指offer——名企面试官精讲典型编程题》，何海涛，电子工业出版社，2017
 
 动态规划与分治的区别：前者自底向上，后者自顶向下
@@ -11,9 +15,9 @@
 * 现场面试：准备几个问题
 * 行为面试->技术面试->应聘者提问
 
-<img src="https://raw.githubusercontent.com/huangrt01/Markdown-Transformer-and-Uploader/mynote/Notes/《剑指offer》笔记/001.jpg" alt="001" style="zoom:50%;" />
+<img src="《剑指offer》笔记/001.jpg" alt="001" style="zoom:50%;" />
 
-<img src="https://raw.githubusercontent.com/huangrt01/Markdown-Transformer-and-Uploader/mynote/Notes/《剑指offer》笔记/002.jpg" alt="002" style="zoom:50%;" />
+<img src="《剑指offer》笔记/002.jpg" alt="002" style="zoom:50%;" />
 
 * 技能：了解、熟悉、精通
 * 常考点：链表、二叉树、快排
@@ -158,15 +162,15 @@ public:
 ##### 19. [正则表达式匹配](https://leetcode-cn.com/problems/zheng-ze-biao-da-shi-pi-pei-lcof/) 
 * [leetcode 10.](https://leetcode-cn.com/problems/regular-expression-matching)
 * 和0072.Edit-Space类似
-
-<img src="https://www.zhihu.com/equation?tex=d%5Bi%5D%5Bj%5D%3D%5Cbegin%7Bcases%7D%0Ad%5Bi-1%5D%5Bj-1%5D%26%20p%5Bj%5D%3D%27.%27%5C%5C%0As%5Bi%5D%20%3D%3D%20p%5Bj%5D%5Cquad%20%5C%26%5C%26%20%5Cquad%20d%5Bi%20-%201%5D%5Bj%20-%201%5D%20%26%20p%5Bj%5D%3Da%5C%5C%0Ad%5Bi%5D%5Bj%20-%202%5D%5Cquad%20%7C%7C%5Cquad%20d%5Bi-1%5D%5Bj%5D%20%26%20p%5Bj-1%3Aj%5D%3D%27.%2A%27%5C%5C%0Ad%5Bi%5D%5Bj%20-%202%5D%5Cquad%20%7C%7C%5Cquad%20%28d%5Bi-1%5D%5Bj%5D%5Cquad%20%5C%26%5C%26%5Cquad%20s%5Bi%5D%3D%3Dp%5Bj-1%5D%29%20%20%20%20%20%20%26%20p%5Bj-1%3Aj%5D%3D%27a%2A%27%0A%5Cend%7Bcases%7D%0A%5Cnotag%0A" alt="d[i][j]=\begin{cases}
+$$
+d[i][j]=\begin{cases}
 d[i-1][j-1]& p[j]='.'\\
 s[i] == p[j]\quad \&\& \quad d[i - 1][j - 1] & p[j]=a\\
 d[i][j - 2]\quad ||\quad d[i-1][j] & p[j-1:j]='.*'\\
 d[i][j - 2]\quad ||\quad (d[i-1][j]\quad \&\&\quad s[i]==p[j-1])      & p[j-1:j]='a*'
 \end{cases}
 \notag
-" class="ee_img tr_noresize" eeimg="1">
+$$
 
 ##### 20.[表示数值的字符串](https://leetcode-cn.com/problems/biao-shi-shu-zhi-de-zi-fu-chuan-lcof)
 * [leetcode 65.](https://leetcode-cn.com/problems/valid-number/)
