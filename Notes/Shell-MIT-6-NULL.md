@@ -766,6 +766,20 @@ shopt expand_aliases # show current status
 #### d
 * d: zsh的特点，可显示最近10个目录，然后`cd -数字`进入
 * date：日期
+* dd
+
+  * you have *very* large devices to copy, so that experimenting to determine the best block-size is worthwhile.
+  * you have to copy only part of a disk. You can specify `count` to limit how many blocks are copied.
+
+  * you want to resume an interrupted copy. You can't do so with `cp`, but you can try with `dd`, by using the `seek` and `skip` options.
+
+  * you want to pipe it to the standard input of something (admittedly, `cat` will work here too):
+
+    ```
+    dd if=/dev/sda bs=10M | ssh host dd of=/dev/sdb
+    ```
+
+  * `dd` usefulness is very well discussed in this Unix and Linux post: [dd vs cat — is dd still relevant these days?](https://unix.stackexchange.com/q/12532/70524)
 * declare
   * https://www.runoob.com/linux/linux-comm-declare.html
 
@@ -917,6 +931,8 @@ scp -r $folder
   * 可用于demo演示终端操作
   
 * sha1sum:  `printf 'hello' | sha1sum`  
+
+* sha256sum
 
 * source
 

@@ -255,6 +255,7 @@ Advanced Text Objects - Text objects like searches can also be composed with vim
 
 * 头文件和源文件切换：`option + O`
   * 搜索switch获知快捷键
+* 历史打开文件切换：`ctrl + TAB`
 
 #### 开发必备插件
 
