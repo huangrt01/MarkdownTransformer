@@ -4627,6 +4627,8 @@ std::isnan(NAN);
 
 #### \<string>
 
+* `auto str = "abc"s;` 后缀s初始化string
+
 * string_view
   * 本身不 own 内存，只是维护指针
   * 适合字符串literal，或者常驻内存的字符串
