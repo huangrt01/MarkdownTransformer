@@ -1,9 +1,33 @@
 
 [toc]
 
+### Code Reading Tools
+
+* 代码行数统计工具 [cloc](https://github.com/AlDanial/cloc)
+
+* grep, [ack](https://beyondgrep.com/), [ag](https://github.com/ggreer/the_silver_searcher) and [rg](https://github.com/BurntSushi/ripgrep)
+  * grep -R can be improved in many ways, such as ignoring .git folders, using multi CPU support, &c
+
+```shell
+# Find all python files where I used the requests library
+rg -t py 'import requests'
+# Find all files (including hidden files) without a shebang line
+rg -u --files-without-match "^#!"
+# Find all matches of foo and print the following 5 lines
+rg foo -A 5
+# Print statistics of matches (# of matched lines and files )
+rg --stats PATTERN
+```
+
+* [C++阅码神器cpptree.pl和calltree.pl的使用 - satanson的文章 - 知乎](https://zhuanlan.zhihu.com/p/339910341)
+
+
+
 ### sponge (CS144 Lab, a TCP implementation)
 
 原理和细节参考我的【Computer-Networking-Lab-CS144-Stanford.md】笔记
+
+https://github.com/huangrt01/TCP-Lab
 
 #### apps
 
@@ -36,7 +60,7 @@ linux中一切即文件的思想
   * router + network_interfaces
 
 
-### libsponge
+#### libsponge
 
 * util
   * file_descriptor
@@ -173,11 +197,10 @@ void DUMMY_CODE(Targs &&... /* unused */) {}
 
       * `using TCPOverIPv4OverEthernetSpongeSocket = TCPSpongeSocket<TCPOverIPv4OverEthernetAdapter>;`
 
-### test
+#### test
 
 ```shell
 sudo apt install tshark
-
 # window1
 ./apps/tcp_ipv4 -l 169.254.144.9 9090
 # window2
@@ -211,5 +234,32 @@ sha256sum /tmp/big-received.txt
 
 
 
+### muduo
 
+https://github.com/chenshuo/muduo
+
+### recipes
+
+https://github.com/chenshuo/recipes
+
+* thread
+
+  * test/Observer_safe.cc： 用weak_ptr + enable_shared_from_this()实现observer设计模式
+
+  * test/Factory.cc: 对象池的迭代
+    * 释放对象：weak_ptr
+    * 解决内存泄漏：shared_ptr初始化传入delete函数
+    * this指针线程安全问题：enable_shared_from_this
+    * Factory生命周期延长：弱回调
+
+#### boost 的使用
+
+```shell
+apt-cache search boost
+sudo apt-get install libboost-all-dev
+
+"-lpthread",
+"-lboost_thread",
+"-lboost_system"
+```
 

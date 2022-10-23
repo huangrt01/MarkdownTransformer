@@ -267,6 +267,15 @@ Advanced Text Objects - Text objects like searches can also be composed with vim
   * Tabnine：AI加持的自动补全，用GPT
   * Peacock：不同workspace可以用不同的颜色区分
 
+#### json配置
+
+##### launch.json
+
+##### task.json
+
+改args
+
+
 
 
 ### Sublime Text
