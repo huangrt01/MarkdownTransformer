@@ -23,13 +23,13 @@ rg --stats PATTERN
 
 
 
-### sponge (CS144 Lab, a TCP implementation)
+### sponge (CS144 TCP Lab)
 
 原理和细节参考我的【Computer-Networking-Lab-CS144-Stanford.md】笔记
 
 https://github.com/huangrt01/TCP-Lab
 
-#### Details
+#### abstract
 
 * shared_ptr的使用
   * 只有FDWrapper（event_loop传入多个duplicate）和Buffer用了shared_ptr
@@ -799,6 +799,40 @@ https://illumos.org/
 	
 	    
 	
+### tinyflow
+
+#### abstract
+
+#### examples
+
+* softmax
+
+  * ```python
+    def softmax(x):
+        x = x - np.max(x, axis=1, keepdims=True)
+        x = np.exp(x)
+        x = x / np.sum(x, axis=1, keepdims=True)
+        return x
+    ```
+
+  * 
+
+
+
+### tensorflow
+
+#### abstract
+
+[一篇很好的回答，梳理tf的核心框架思路](https://www.zhihu.com/question/51216952/answer/124708405) MUSTDO
+
+#### Ops
+
+* dropout
+  * keras/layers/core.py: `Class Dropout(Layer)` -> `nn.dropout`
+  * ops/nn_ops.py: _dropout()
+    * 注意是在training时进行scale，推理时忽略
+
+
 
 ### TODO
 
